@@ -1,0 +1,40 @@
+html,body{
+    font-family: 'Baloo Thambi 2', cursive;
+}
+
+.highlight{
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+}
+.navbar-light .navbar-brand{
+    color: white;
+}
+.back-blue{
+    background-color: #0000FF;
+    color: white;
+    margin: 0 auto 0 auto;
+}
+.container-fluid{
+    margin-top: 90px;
+}
+.card-outline-redblood{
+    border-left: 6px solid #5151ef;
+}
+label{
+    font-size:18px;
+}
+.nav-link.redblood{
+    margin-bottom: 1px;
+}
+.redblood, .nav-pills .nav-link.active, .nav-pills .show>.nav-link.redblood.active{
+    background-color: #fff;
+    color:#b71c1c;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link.redblood.active{
+    background-color: #b3b3e2;
+    font-weight: 700;
+}
+.toast-top-right{
+    margin-top: 78px;
+}
