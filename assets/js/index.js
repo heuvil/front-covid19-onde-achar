@@ -1,6 +1,38 @@
 var api_estado_url="https://servicodados.ibge.gov.br/api/v1";
 var api_ondeAchar_url="https://covid19-onde-achar.herokuapp.com";
 
+function achaCidade(idCidade, rowId) {
+    $.ajax ({
+        url: api_estado_url + "/localidades/municipios/" + idCidade,
+        type: "GET",
+        dataType: "json",
+        async: "false",
+    })
+    .done(function(cidade){
+//        console.log("cidade = " + cidade.nome);
+        $('#lista-ajude #' + rowId + ' .sol-cidade').html(cidade.nome);
+    })
+    .always(function(json, status){
+        //console.log(json);
+    })
+};
+
+function achaProduto(idProduto, rowId) {
+    $.ajax ({
+        url: api_ondeAchar_url +"/produtos/" + idProduto,
+        type: "GET",
+        dataType: "json",
+        async: "false",
+    })
+    .done(function(produto){
+//        console.log("produto = " + produto.descricao);
+        $('#lista-ajude #' + rowId + ' .sol-produto').html(produto.descricao);
+    })
+    .always(function(json, status){
+//        console.log(json);
+    })
+};
+
 function createProduto(){
     var produto = {
         id: $("#idProduto").val(),
@@ -26,6 +58,7 @@ function createProduto(){
 }
 
 function carregaProdutos(){
+    $('#lista-produtos').html("");
     var exibeProdutos = $.get( api_ondeAchar_url+"/produtos", function(produtos) {
         $(".lista-produtos").remove();
         $.each(produtos, function(index, obj) {
@@ -59,6 +92,7 @@ function removeProduto(idProdutoRemover){
 
         request.done(function( msg ) {
             toastr.success(msg, 'Produto removido');
+            carregaProdutos();
         });
 
         request.fail(function( jqXHR, status ) {
@@ -99,25 +133,36 @@ function createSolicitacao(){
     });
 }
 
+function limpaTabelaSolicitacoes(){
+    $('#lista-ajude').html("");
+}
+
 function carregaSolicitacoes(){
     var exibeSolicitacoes = $.get( api_ondeAchar_url+"/usuarios", function(solicitacao) {
+        var produtos;
         $.each(solicitacao, function(index, obj) {
-            var linha = "<tr><td></td>"
-//            +"<td style="display: none;">"+obj.cpf+"</td>"
-            +"<td>"+obj.nome+"</td>"
-            +"<td>"+obj.celular+"</td>"
-            +"<td>"+obj.email+"</td>"
-            +"<td>"+obj.cidade+"</td>"
-            +"<td>"+obj.necessidade[0].idProduto+"</td>"
-            +"<td>"+obj.necessidade[0].mensagem+"</td>"
-            +"<td><i class='fa fa-edit' onclick='updateSolicitacao("+obj.id+")'></i> <i class='fa fa-remove' onclick='removeSolicitacao("+obj.id+")'></i></td>"
+            produtos = solicitacao;
+
+            var cid = achaCidade(obj.cidade, index);
+            var prod = achaProduto(obj.necessidade[0].idProduto, index);
+
+            //console.log("Momento1 = " + nomeCidade + " " + descricaoProduto);
+            var linha = "<tr id = " + index + "><td></td>"
+            +"<td class='sol-nome'>"+obj.nome+"</td>"
+            +"<td class='sol-celular'>"+obj.celular+"</td>"
+            +"<td class='sol-email'>"+obj.email+"</td>"
+            +"<td class='sol-cidade'>"+obj.cidade+"</td>"
+            +"<td class='sol-produto'>"+obj.necessidade[0].idProduto + "</td>"
+            +"<td class='sol-mensagem'>"+obj.necessidade[0].mensagem+"</td>"
+            +"<td><i class='fa fa-edit'></i> <i class='fa fa-remove' onclick='removeSolicitacao("+obj.id+")'></i></td>"
+//            +"<td><i class='fa fa-edit' onclick='updateSolicitacao("+obj.id+")'></i> <i class='fa fa-remove' onclick='removeSolicitacao("+obj.cpf+")'></i></td>"
             +"</tr>";
             $(linha).appendTo("#lista-ajude");
         });
         if(produtos.length == 0){
             toastr.info('Nenhum produto encontrado!');}
         else{
-            toastr.success("Qtd: "+produtos.length, 'Busca efetuada com sucesso!');
+            toastr.success("Qtd: "+produtos.length, 'Busca de necessidades efetuada com sucesso!');
         }
     })
     .done(function() {
@@ -128,6 +173,23 @@ function carregaSolicitacoes(){
     .always(function() {
     });
 }
+
+function removeSolicitacao(idUsuarioRemover){
+    var request = $.ajax({
+            type: "DELETE",
+            url: api_ondeAchar_url+"/usuarios/"+idUsuarioRemover,
+          });
+
+        request.done(function( msg ) {
+            toastr.success(msg, 'Solicitação removida');
+            carregaSolicitacoes();
+        });
+
+        request.fail(function( jqXHR, status ) {
+            toastr.error( "Não foi possível remover a solicitação. Status: " + status, 'Erro ao remover solicitação' );
+        });
+}
+
 
 function hide(){
     $(".conteudo").hide();
@@ -142,10 +204,9 @@ function menu(){
     });
 }
 
-
 $(document).ready(function(){
     menu();
-    
+
     $.get(api_estado_url+"/localidades/estados",function(estados){
         estados.sort(function (a, b) {
             if (a.sigla > b.sigla) return 1;
@@ -187,7 +248,8 @@ $(document).ready(function(){
 
 
     $("body").on("click","#buscaSolicitacoes",function(){
-        carregaSolicitacoes($("#FiltraProduto").val(),$("#FiltraUF").val(),$("#FiltraCidade").val());
+        limpaTabelaSolicitacoes();
+        carregaSolicitacoes($("#FiltraProduto").val());
     });
 
     toastr.options = {

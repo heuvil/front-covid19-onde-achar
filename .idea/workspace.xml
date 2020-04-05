@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0c55c813-4aad-4fcc-a3cc-843ef40418cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/main.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +21,8 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/index.js" />
+    <property name="two.files.diff.last.used.file" value="$USER_HOME$/Downloads/index.js" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -39,6 +38,18 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="100" y="127" width="1720" height="853" key="DiffContextDialog" timestamp="1586104160398">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="100" y="127" width="1720" height="853" key="DiffContextDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1586104160398" />
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl" timestamp="1586104159879">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="743" y="311" width="424" height="491" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1586104159879" />
+    <state x="639" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1586103961055">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="639" y="381" key="com.intellij.ide.util.TipDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1586103961055" />
     <state x="643" y="174" width="634" height="759" key="find.popup" timestamp="1586021771527">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
