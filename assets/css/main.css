@@ -11,15 +11,15 @@ html,body{
     color: white;
 }
 .back-blue{
-    background-color: #0000FF;
+    background-color: #003399;
     color: white;
     margin: 0 auto 0 auto;
 }
 .container-fluid{
     margin-top: 90px;
 }
-.card-outline-redblood{
-    border-left: 6px solid #5151ef;
+.card-outline{
+    border-left: 6px solid #CCFFCC;
 }
 label{
     font-size:18px;
@@ -29,7 +29,7 @@ label{
 }
 .redblood, .nav-pills .nav-link.active, .nav-pills .show>.nav-link.redblood.active{
     background-color: #fff;
-    color:#b71c1c;
+    color:#0099CC;
 }
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link.redblood.active{
     background-color: #b3b3e2;

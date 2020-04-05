@@ -33,21 +33,15 @@
             <span class="highlight">O</span>nde
             <span class="highlight">A</span>char
         </a>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Ex: O+,O-,AB" aria-label="Buscar"/>
-            <button class="btn btn-outline-sucess my-2 my-sm-0" type="submit">
-                <i class="fa fa-search" aria-hidden="true"></i> Buscar
-            </button>
-        </form>
     </nav>
     <div class="row ">
         <div class="col-3">
-            <div class="card card-outline-redblood">
+            <div class="card card-outline">
                 <div class="nav flex-column nav-pills">
                     <a class="menu nav-link redblood" data-toggle="pill" href="#v-produtos"><i
-                            class="fa fa-user fa"></i> Incluir produtos</a>
+                            class="fa fa-pencil fa"></i> Incluir produtos</a>
                     <a class="menu nav-link redblood active" data-toggle="pill" href="#v-cadastrar"><i
-                            class="fa fa-pencil fa"></i> Cadastrar solicitação</a>
+                            class="fa fa-user fa"></i> Cadastrar solicitação</a>
                     <a class="menu nav-link redblood" data-toggle="pill" href="#v-ajude"><i
                             class="fa fa-users fa"></i> Ajude alguém</a>
                 </div>
@@ -57,7 +51,7 @@
         <div class="col-7">
 
             <div class="conteudo" id="v-produtos" style="display: none;">
-                <div class="card text-center card-outline-redblood">
+                <div class="card text-center card-outline">
                     <div class="card-body">
                         <h3 class="card-title"><strong>Cadastrar produto</strong></h3>
                         <hr/>
@@ -87,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card text-center card-outline-redblood">
+                <div class="card text-center card-outline">
                     <div class="card-body">
                         <h3 class="card-title"><strong>Lista de produtos cadastrados</strong></h3>
                         <hr>
@@ -115,7 +109,7 @@
                 </div>
             </div>
             <div class="conteudo" id="v-cadastrar">
-                <div class="card text-center card-outline-redblood">
+                <div class="card text-center card-outline">
                     <div class="card-body">
                         <h3 class="card-title"><strong>Cadastrar solicitação</strong></h3>
                         <hr/>
@@ -136,7 +130,6 @@
                                            aria-describedby="telefone" placeholder="Telefone">
                                 </div>
                             </div>
-
                             <div class="col-5">
                                 <div class="form-group">
                                     <label for="email">E-mail</label>
@@ -154,7 +147,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="Cidade">Cidade</label>
@@ -195,9 +187,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="conteudo" id="v-ajude" style="display: none;">
-                <div class="card text-center card-outline-redblood">
+                <div class="card text-center card-outline">
                     <div class="card-body">
                         <h3 class="card-title"><strong>Ajude essas pessoas a encontrar</strong></h3>
                         <hr/>
@@ -210,7 +201,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-2">
                                 <div class="form-group">
                                     <label for="FiltraUF">UF</label>
@@ -219,7 +209,6 @@
                                     </select>
                                 </div>
                             </div>
-
                             <div class="col-3">
                                 <div class="form-group">
                                     <label for="FiltraCidade">Cidade</label>
@@ -231,7 +220,7 @@
                             <div class="col-2">
                                 <div class="form-group" style="margin-top:35px">
                                     <label for=""> </label>
-                                    <button type="button" id="okDoador" class="btn"><i class="fa fa-search"></i> Buscar
+                                    <button type="button" id="buscaSolicitacoes" class="btn"><i class="fa fa-search"></i> Buscar
                                     </button>
                                 </div>
                             </div>
@@ -240,14 +229,13 @@
                             <thead class="thead redblood">
                             <tr>
                                 <th scope="col">#</th>
+<!--                                <th scope="col">idUsuario</th>-->
                                 <th scope="col">Nome</th>
-                                <th scope="col">Idade</th>
-                                <th scope="col">Tipo Sanguíneo</th>
-                                <th scope="col">CPF</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">UF</th>
-                                <th scope="col">Cidade</th>
+                                <th scope="col">Celular</th>
+                                <th scope="col">email</th>
+                                <th scope="col">cidade</th>
+                                <th scope="col">produto</th>
+                                <th scope="col">Mensagem</th>
                                 <th scope="col">#</th>
                             </tr>
                             </thead>

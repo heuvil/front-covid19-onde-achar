@@ -1,5 +1,4 @@
 var api_estado_url="https://servicodados.ibge.gov.br/api/v1";
-//var api_doador_url="https://fiap-covid19.herokuapp.com";
 var api_ondeAchar_url="https://covid19-onde-achar.herokuapp.com";
 
 function createProduto(){
@@ -25,113 +24,6 @@ function createProduto(){
         toastr.error( "Não foi possível incluir o produto. Status: " + status, 'Erro ao inserir' );
     });
 }
-
-function createSolicitacao(){
-    var solicitacao = {
-          celular: $("#telefone").val(),
-          cidade: $("#cidade").val(),
-          cpf: $("#cpf").val(),
-          email: $("#email").val(),
-          necessidade: [
-            {
-              idProduto: 0,
-              mensagem: "string"
-            }
-          ],
-          nome: $("#nome").val(),
-    };
-
-    console.log(JSON.stringify(solicitacao));
-
-    var request = $.ajax({
-        type: "POST",
-        contentType: 'application/json',
-        url: api_ondeAchar_url+"/",
-        data: JSON.stringify(produto)
-      });
-
-    request.done(function( msg ) {
-        toastr.success(msg, 'Produto cadastrado');
-    });
-
-    request.fail(function( jqXHR, status ) {
-        toastr.error( "Não foi possível incluir o produto. Status: " + status, 'Erro ao inserir' );
-    });
-}
-
-//function createDoador(){
-//    var model = {
-//        nome: $("#nome").val(),
-//        tipoSanguineo: $("#tipoSanguineo").val(),
-//        cidade: $("#cidade").val(),
-//        UF: $("#UF").val(),
-//        idade: $("#idade").val(),
-//        cpf: $("#cpf").val(),
-//        email: $("#email").val(),
-//        telefone: $("#telefone").val(),
-//    };
-//
-//    console.log(JSON.stringify(model));
-//
-//    var request = $.ajax({
-//        type: "POST",
-//        contentType: 'application/json',
-//        url: api_doador_url+"/doadores",
-//        data: JSON.stringify(model)
-//      });
-//
-//    request.done(function( msg ) {
-//        toastr.success(msg, 'Doador cadastrado com sucesso!');
-//    });
-//
-//    request.fail(function( jqXHR, status ) {
-//        toastr.error( "Requisão falhou: " + status, 'Erro ao cadastrar' );
-//    });
-//}
-
-//function loadDoadores(tipoSanguineo,cidade){
-//    var params = "";
-//    if(cidade > 0 && tipoSanguineo!= "") {
-//     params = "?tipoSanguineo="+tipoSanguineo+"&cidade="+cidade;
-//    }
-//    var jqxhr = $.get( api_doador_url+"/doadores"+params, function(estados) {
-//        $.each(estados, function(index, obj) {
-//            var linha = "<tr><td></td>"
-//            +"<td>"+obj.nome+"</td>"
-//            +"<td>"+obj.idade+"</td>"
-//            +"<td>"+obj.tipoSanguineo+"</td>"
-//            +"<td>"+obj.cpf+"</td>"
-//            +"<td>"+obj.telefone+"</td>"
-//            +"<td>"+obj.email+"</td>"
-//            +"<td>"+obj.UF+"</td>"
-//            +"<td>"+obj.cidade+"</td>"
-//            +"<td><i class='fa fa-edit' onclick='updateDoador("+obj.id+")'></i> <i class='fa fa-remove' onclick='removeDoador("+obj.id+")'></i></td>"
-//            +"</tr>";
-//            $(linha).appendTo("#lista-doadores");
-//        });
-//        if(estados.length == 0){
-//            toastr.info('Nenhum registro encontrado!');}
-//        else{
-//
-//            toastr.success("Qtd: "+estados.length, 'Busca efetuada com sucesso!');
-//        }
-//    })
-//    .done(function() {
-//    })
-//    .fail(function() {
-//        toastr.error('Erro ao buscar informações!');
-//    })
-//    .always(function() {
-//    });
-//
-//}
-
-
-//    $.get(api_ondeAchar_url+"/produtos", function(produtos){
-//        $.each(produtos, function(index, obj) {
-//            $("<option data-id=\""+obj.id+"\" value=\""+obj.id+"\">"+obj.id+" - "+obj.descricao+"</option>").appendTo("#Produto");
-//        });
-//    });
 
 function carregaProdutos(){
     var exibeProdutos = $.get( api_ondeAchar_url+"/produtos", function(produtos) {
@@ -172,6 +64,69 @@ function removeProduto(idProdutoRemover){
         request.fail(function( jqXHR, status ) {
             toastr.error( "Não foi possível remover o produto. Status: " + status, 'Erro ao remover' );
         });
+}
+
+function createSolicitacao(){
+    var solicitacao = {
+          celular: $("#telefone").val(),
+          cidade: $("#cidade").val(),
+          cpf: $("#cpf").val(),
+          email: $("#email").val(),
+          necessidade: [
+            {
+              idProduto: $("#Produto").val(),
+              mensagem: $("#Justificativa").val(),
+            }
+          ],
+          nome: $("#nome").val(),
+    };
+
+    console.log(JSON.stringify(solicitacao));
+
+    var request = $.ajax({
+        type: "POST",
+        contentType: 'application/json',
+        url: api_ondeAchar_url+"/usuarios",
+        data: JSON.stringify(solicitacao)
+      });
+
+    request.done(function( msg ) {
+        toastr.success(msg, 'Solicitação cadastrada com sucesso');
+    });
+
+    request.fail(function( jqXHR, status ) {
+        toastr.error( "Não foi possível incluir a solicitação. Status: " + status, 'Erro ao inserir' );
+    });
+}
+
+function carregaSolicitacoes(){
+    var exibeSolicitacoes = $.get( api_ondeAchar_url+"/usuarios", function(solicitacao) {
+        $.each(solicitacao, function(index, obj) {
+            var linha = "<tr><td></td>"
+//            +"<td style="display: none;">"+obj.cpf+"</td>"
+            +"<td>"+obj.nome+"</td>"
+            +"<td>"+obj.celular+"</td>"
+            +"<td>"+obj.email+"</td>"
+            +"<td>"+obj.cidade+"</td>"
+            +"<td>"+obj.necessidade[0].idProduto+"</td>"
+            +"<td>"+obj.necessidade[0].mensagem+"</td>"
+            +"<td><i class='fa fa-edit' onclick='updateSolicitacao("+obj.id+")'></i> <i class='fa fa-remove' onclick='removeSolicitacao("+obj.id+")'></i></td>"
+            +"</tr>";
+            $(linha).appendTo("#lista-ajude");
+        });
+        if(produtos.length == 0){
+            toastr.info('Nenhum produto encontrado!');}
+        else{
+            toastr.success("Qtd: "+produtos.length, 'Busca efetuada com sucesso!');
+        }
+    })
+    .done(function() {
+    })
+    .fail(function() {
+        toastr.error('Erro ao buscar a lista de produtos!');
+    })
+    .always(function() {
+    });
 }
 
 function hide(){
@@ -231,8 +186,8 @@ $(document).ready(function(){
     });
 
 
-    $("body").on("click","#okDoador",function(){
-        loadDoadores($("#tiposanguineoDoador").val(),$("#CidadeDoador").val());
+    $("body").on("click","#buscaSolicitacoes",function(){
+        carregaSolicitacoes($("#FiltraProduto").val(),$("#FiltraUF").val(),$("#FiltraCidade").val());
     });
 
     toastr.options = {
